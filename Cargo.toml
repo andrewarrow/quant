@@ -1,0 +1,23 @@
+[package]
+name = "quant"
+version = "0.1.0"
+edition = "2024"
+authors = ["Strale <strahinjastojanovic826@gmail.com>"]
+description = "A full-stack high-performance Quantum Operating System and simulator engine written in Rust."
+readme = "README.md"
+repository = "https://github.com/strahinjastojanovic826-code/qindex" 
+license = "AGPL-3.0-or-later"
+keywords = ["quantum", "simulator", "qasm", "vqe", "physics"]
+categories = ["science", "emulators", "command-line-utilities"]
+
+[dependencies]
+num-complex = "0.4"
+rayon = "1.8"
+rand = "0.8"
+
+[profile.release]
+opt-level = 3 
+lto = true          
+codegen-units = 1    
+panic = "abort"      
+strip = true     
