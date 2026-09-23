@@ -79,6 +79,29 @@ cargo build --release
 
 ---
 
+## 60-second stress test
+
+Run the sustained state-vector workload directly, without the diagnostic boot sequence:
+
+```bash
+cargo run --release -- --stress
+```
+
+The defaults are 60 seconds and 18 qubits. Override either value with
+`--stress <seconds> <qubits>` (2–22 qubits), for example:
+
+```bash
+cargo run --release -- --stress 10 20
+```
+
+From the interactive `qos_kernel>` shell, run the same workload with:
+
+```text
+stress [seconds] [qubits]
+```
+
+---
+
 ## How to demo it
 
 Here are the best things to try. The shell starts with **8 simulated qubits**, numbered `0` through `7`.
@@ -490,4 +513,3 @@ measure 100 0
 where PID 100 sees its own **virtual qubits 0 and 1**, and the kernel maps those onto physical qubits. Then you'd actually start getting something resembling a tiny quantum OS.
 
 **I'd play with the GHZ state first, then deliberately break the allocator.** Those two experiments show both the genuinely neat quantum-simulator part and the immature "OS kernel" part.
-
