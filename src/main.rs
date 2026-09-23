@@ -53,8 +53,47 @@ use scheduler::QuantumScheduler;
 use noise::{EnvironmentalNoise, NoiseModel};
 use bench::KernelBenchmark;
 use cli::KernelCLI;
+use std::time::Duration;
 
 fn main() {
+    let args: Vec<String> = std::env::args().skip(1).collect();
+    if !args.is_empty() {
+        match args[0].as_str() {
+            "--stress" => {
+                let values: Vec<&str> = args[1..].iter().map(String::as_str).collect();
+                match cli::parse_stress_args(&values) {
+                    Ok((seconds, qubits)) => {
+                        KernelBenchmark::run_timed_stress_test(
+                            Duration::from_secs(seconds),
+                            qubits,
+                        );
+                        return;
+                    }
+                    Err(error) => {
+                        eprintln!("error: {error}");
+                        eprintln!("usage: quant --stress [seconds] [qubits]");
+                        std::process::exit(2);
+                    }
+                }
+            }
+            "--help" | "-h" => {
+                println!("Quantum OS Kernel & Simulator");
+                println!();
+                println!("Usage:");
+                println!("  quant                         Run the demo and interactive shell");
+                println!(
+                    "  quant --stress [secs] [qbits] Run a sustained stress test (defaults: 60 18)"
+                );
+                return;
+            }
+            option => {
+                eprintln!("error: unknown option '{option}'");
+                eprintln!("try 'quant --help'");
+                std::process::exit(2);
+            }
+        }
+    }
+
     println!("=== Quantum OS Simulator Booting ===");
 
     // Inicijalizujemo registar sa 1 kubitom
