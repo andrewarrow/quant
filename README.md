@@ -78,3 +78,24 @@ cargo build --release
 ./target/release/quantum_os
 
 ---
+
+### 60-second stress test
+
+Run the sustained state-vector workload directly, without the diagnostic boot sequence:
+
+```bash
+cargo run --release -- --stress
+```
+
+The defaults are 60 seconds and 18 qubits. Override either value with
+`--stress <seconds> <qubits>` (2–22 qubits), for example:
+
+```bash
+cargo run --release -- --stress 10 20
+```
+
+From the interactive `qos_kernel>` shell, run the same workload with:
+
+```text
+stress [seconds] [qubits]
+```
