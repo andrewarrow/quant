@@ -60,9 +60,10 @@ Clone the repository:
 
 cd quantum_os
 
+```
+
 ---
 
-```
 Running the OS
 
 To run the full diagnostic boot sequence, benchmarks, and interactive shell in debug mode:
