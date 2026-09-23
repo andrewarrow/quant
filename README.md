@@ -58,12 +58,11 @@ Benchmarks executed on the State Vector engine (Windows x86_64, Release Mode):
 Clone the repository:
 ```bash
 
-```
 cd quantum_os
 
 ---
 
-
+```
 Running the OS
 
 To run the full diagnostic boot sequence, benchmarks, and interactive shell in debug mode:
